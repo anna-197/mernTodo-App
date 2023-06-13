@@ -1,5 +1,7 @@
 
+const mongoose = require("mongoose");
 const todoModel = require("../models/todoModel");
+const userModel = require("../models/userModel");
 
 exports.getAllTodo = (req, res) => {
     todoModel.find()
@@ -13,16 +15,32 @@ exports.getAllTodo = (req, res) => {
 
 exports.postCreateTodo = async (req, res) => {
     try {
-        const { title, description } = req.body;
+        const { title, description, user } = req.body;
         //validation
-        if (!title) {
+        if (!title || !user) {
           return res.status(400).send({
             success: false,
-            message: "Please Provide ALl Fields",
+            message: "Please Provide All Fields",
           });
         }
-       
-        const newTodo = new todoModel({ title, description });
+        
+        const exisitingUser = await userModel.findById(user);
+        //validation
+        if(!exisitingUser){
+          return res.status(404).send({
+            success:false,
+            message: 'unable to find user',
+          })
+        }
+
+        const newTodo = new todoModel({ title, description, user });
+        const session = await mongoose.startSession()
+        session.startTransaction()
+        await newTodo.save({session})
+        
+        exisitingUser.todo.push(newTodo)
+        await exisitingUser.save({session})
+        await session.commitTransaction();
         await newTodo.save();
         return res.status(201).send({
           success: true,
