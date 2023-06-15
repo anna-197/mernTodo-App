@@ -37,7 +37,7 @@ const Header = () => {
     
    {isLogin && (
     <>
-    <button>Logout</button>
+    <button onClick={handleLogout}>Logout</button>
     </>
 
    )}

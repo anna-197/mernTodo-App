@@ -14,7 +14,7 @@ const Login = () => {
   });
 
   //handle input change
-  const handleChange = (e) => {
+  const handleLoginChange = (e) => {
     setInputs((prevState) => ({
       ...prevState,
       [e.target.name]: e.target.value,
@@ -22,7 +22,7 @@ const Login = () => {
   };
 
   //form handle
-  const handleSubmit = async (e) => {
+  const handleLoginSubmit = async (e) => {
     e.preventDefault();
     try {
       const { data } = await axios.post("http://localhost:8080/api/user/login", {
@@ -39,22 +39,69 @@ const Login = () => {
       console.log(error);
     }
   };
+
+  //REGISTER
+
+  //handle input change
+  const handleRegisterChange = (e) => {
+    setInputs((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
+  //form handle
+  const handleRegisterSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const { data } = await axios.post("http://localhost:8080/api/user/register", {
+        username: inputs.name,
+        email: inputs.email,
+        password: inputs.password,
+      });
+      if (data.success) {
+        alert("User Register Successfully");
+        navigate("/login");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div class="main">  	
 		<input type="checkbox" id="chk" aria-hidden="true" />
 
 			<div class="signup">
-				{/* <form>
+				<form onSubmit={handleRegisterSubmit}>
 					<label for="chk" aria-hidden="true">Sign up</label>
-					<input type="text" name="txt" placeholder="User name" required="" />
-					<input type="email" name="email" placeholder="Email" required="" />
-					<input type="password" name="pswd" placeholder="Password" required="" />
+					<input  placeholder="name"
+            value={inputs.name}
+            onChange={handleRegisterChange}
+            name="name"
+            margin="normal"
+            type={"text"}
+            required />
+					<input placeholder="email"
+            value={inputs.email}
+            name="email"
+            margin="normal"
+            type={"email"}
+            required
+            onChange={handleRegisterChange} />
+					<input  placeholder="password"
+            value={inputs.password}
+            name="password"
+            margin="normal"
+            type={"password"}
+            required
+            onChange={handleRegisterChange} />
 					<button>Sign up</button>
-				</form> */}
+				</form>
 			</div>
 
 			<div class="login">
-				<form onSubmit={handleSubmit}>
+				<form onSubmit={handleLoginSubmit}>
 					<label for="chk" aria-hidden="true">Login</label>
 					<input placeholder="email"
             value={inputs.email}
@@ -62,14 +109,14 @@ const Login = () => {
             margin="normal"
             type={"email"}
             required
-            onChange={handleChange} />
+            onChange={handleLoginChange} />
 					<input placeholder="password"
             value={inputs.password}
             name="password"
             margin="normal"
             type={"password"}
             required
-            onChange={handleChange}/>
+            onChange={handleLoginChange}/>
 					<button>Login</button>
 				</form>
 			</div>
