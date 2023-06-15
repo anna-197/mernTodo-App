@@ -15,10 +15,11 @@ const app = express();
 
 // routes
 const todoRoutes = require("./routes/todoRoutes"); 
+const userRoutes = require("./routes/userRoutes")
 
 //middelwares
 // cors
-app.use(cors()); // added
+app.use(cors()); 
 app.use(express.json());
 
 // initialize middleware
@@ -26,7 +27,8 @@ app.use(express.json());
 app.get("/", (req, res) => res.send("Server up and running"));
 
 // use routes
-app.use("/api/todo", todoRoutes); // added
+app.use("/api/todo", todoRoutes); 
+app.use("/api/user", userRoutes);
 
 // setting up port
 const PORT = process.env.PORT || 8080;

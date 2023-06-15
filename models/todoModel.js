@@ -9,6 +9,11 @@ const TodoSchema = new mongoose.Schema({
     description: {
         type: "String",
     },
+    // user: {
+    //     type: mongoose.Types.ObjectId,
+    //     ref: "User",
+    //     require: [true, "user id is required"],
+    //   },
 });
 
 const todoModel = mongoose.model("todo", TodoSchema);
