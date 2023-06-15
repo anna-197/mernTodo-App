@@ -22,9 +22,7 @@ const userRoutes = require("./routes/userRoutes")
 app.use(cors()); 
 app.use(express.json());
 
-// initialize middleware
-app.use(express.json());
-app.get("/", (req, res) => res.send("Server up and running"));
+// app.get("/", (req, res) => res.send("Server up and running"));
 
 // use routes
 app.use("/api/todo", todoRoutes); 
