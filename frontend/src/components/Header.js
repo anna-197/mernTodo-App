@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { authActions } from "../redux/store";
 import Login from "../pages/Login";
+import { ShowTodos } from "./ShowTodos";
 
 const Header = () => {
   // global state
@@ -26,24 +27,30 @@ const Header = () => {
     }
   };
   return (
-    <>
-    {!isLogin && (
-        <>
-        <Link to="/login" element = {<Login/>}>
-    <button>Login</button>
+    <div className="header">
+    <Link to="/" element={<ShowTodos />}>
+    <div className="header-logo"><img src="https://cdn.icon-icons.com/icons2/1859/PNG/512/checklist_117966.png"></img></div>
     </Link>
+    <div className="header-title">Taskify</div>
+      {!isLogin && (
+        <>
+          <Link to="/login" element={<Login />}>
+            <button className="btn">Sign Up / Sign In</button>
+          </Link>
         </>
-    )}
-    
-   {isLogin && (
-    <>
-    <button onClick={handleLogout}>Logout</button>
-    </>
+      )}
 
-   )}
-       
-    </>
-  )
-}
+      {isLogin && (
+        <>
+        <Link to="/create-todo" className="button-new">
+                <button className="new-btn">Create Todo</button>
+            </Link>
+          <button className="btn" onClick={handleLogout}>Logout</button>
+         
+        </>
+      )}
+    </div>
+  );
+};
 
 export default Header;

@@ -33,18 +33,14 @@ export function CreateTodos() {
 
     return (
         <section className="container">
-            <Link to="/" className="button-back">
-                <button type="button" className="button">
-                    back
-                </button>
-            </Link>
+           
             <section className="contents">
                 <form
                     onSubmit={handleSubmit}
                     className="form-container"
                     noValidate
                 >
-                    <label className="label" htmlFor="title">
+                    <label className="container-label" htmlFor="title">
                         Title
                     </label>
                     <input
@@ -69,6 +65,11 @@ export function CreateTodos() {
                     </button>
                 </form>
             </section>
+            <Link to="/" >
+                <button type="button" className="back-button">
+                    Go Back
+                </button>
+            </Link>
         </section>
     );
 }

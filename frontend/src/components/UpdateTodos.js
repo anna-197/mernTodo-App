@@ -12,6 +12,7 @@ export function UpdateTodos({ _id, handleClose, handleEdited }) {
 
     function handleSubmit(e) {
         e.preventDefault();
+        navigate("/");
 
         console.log({ _id }, { data });
 
@@ -27,6 +28,8 @@ export function UpdateTodos({ _id, handleClose, handleEdited }) {
                 console.log("Failed to update todo");
                 console.log(err.message);
             });
+
+            navigate("/");
             
     }
 
@@ -56,7 +59,7 @@ export function UpdateTodos({ _id, handleClose, handleEdited }) {
                 className="input"
                 onChange={handleChange}
             />
-            <button type="submit" className="button">
+            <button type="submit" className="button" >
                 Submit
             </button>
         </form>
