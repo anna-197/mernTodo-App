@@ -35,11 +35,12 @@ exports.postCreateTodo = async (req, res) => {
     console.log(error);
     return res.status(400).send({
       success: false,
-      message: "Error WHile Creting blog",
-      error,
+      message: "Error While Creating todo",
+      error: error.message,
     });
   }
 };
+
 
 exports.putUpdateTodo = (req, res) => {
   const navigate = useNavigate();
