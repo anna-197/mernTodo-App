@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { authActions } from "../redux/store";
 import Login from "../pages/Login";
+import UserTodos from "../pages/UserTodos";
 
 const Header = () => {
   // global state
@@ -32,12 +33,17 @@ const Header = () => {
         <Link to="/login" element = {<Login/>}>
     <button>Login</button>
     </Link>
+
+    
         </>
     )}
     
    {isLogin && (
     <>
     <button onClick={handleLogout}>Logout</button>
+    <Link to="/get-user-todos/:id" element = {<UserTodos/>}>
+    <button>Get My Todos</button>
+    </Link>
     </>
 
    )}

@@ -2,28 +2,9 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { UpdateTodos } from "./UpdateTodos";
+import TodoCard from "./TodoCard";
 
-function TodoCard({ data, handleEdit, handleDelete }) { // updated
-    const { _id, title, description } = data;
 
-    return (
-        <li key={_id}>
-            <div className="title-description">
-                <h3>{title}</h3>
-                <p>{description}</p>
-            </div>
-
-            <div className="button-container">
-                <button className="button" name={_id} onClick={handleEdit}> 
-                    edit
-                </button>
-                <button className="button" name={_id} onClick={handleDelete}>
-                    delete
-                </button>
-            </div>
-        </li>
-    );
-}
 
 export function ShowTodos() {
     const [todo, setTodo] = useState([]);
@@ -51,7 +32,7 @@ export function ShowTodos() {
         setOpen(true);
     }
 
-    function handleUpdate() { 
+     function handleUpdate() { 
         console.log("update:", update, !update);
         setUpdate(!update);
     }
